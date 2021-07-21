@@ -26,16 +26,6 @@
       "default": 0,
       "type": "decimal"
     },
-    "type": {
-      "type": "enumeration",
-      "enum": [
-        "vegetebles",
-        "fruits",
-        "berry",
-        "verdure"
-      ],
-      "required": true
-    },
     "mainImage": {
       "model": "file",
       "via": "related",
@@ -55,10 +45,6 @@
       "plugin": "upload",
       "required": true,
       "pluginOptions": {}
-    },
-    "country": {
-      "type": "string",
-      "required": true
     },
     "discount": {
       "type": "integer",
@@ -84,6 +70,14 @@
       "required": true,
       "min": 0,
       "default": 1
+    },
+    "country": {
+      "via": "products",
+      "model": "country"
+    },
+    "category": {
+      "via": "products",
+      "model": "category"
     }
   }
 }

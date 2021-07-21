@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "categories",
+  "info": {
+    "name": "Category",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "maxLength": 200,
+      "minLength": 2,
+      "unique": true
+    },
+    "products": {
+      "via": "category",
+      "collection": "products"
+    }
+  }
+}
