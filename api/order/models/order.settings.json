@@ -1,0 +1,55 @@
+{
+  "kind": "collectionType",
+  "collectionName": "orders",
+  "info": {
+    "name": "Order",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "user": {
+      "plugin": "users-permissions",
+      "model": "user",
+      "via": "orders"
+    },
+    "products": {
+      "collection": "products",
+      "via": "orders",
+      "dominant": true
+    },
+    "name": {
+      "type": "string",
+      "required": true,
+      "minLength": 2,
+      "maxLength": 200
+    },
+    "surname": {
+      "type": "string",
+      "maxLength": 200,
+      "minLength": 3
+    },
+    "email": {
+      "type": "string",
+      "required": true,
+      "maxLength": 200,
+      "minLength": 3
+    },
+    "address": {
+      "type": "string",
+      "required": true,
+      "maxLength": 500,
+      "minLength": 5
+    },
+    "phone": {
+      "type": "string",
+      "required": true,
+      "maxLength": 100,
+      "minLength": 5
+    }
+  }
+}

@@ -78,6 +78,10 @@
     "category": {
       "via": "products",
       "model": "category"
+    },
+    "orders": {
+      "via": "products",
+      "collection": "order"
     }
   }
 }
