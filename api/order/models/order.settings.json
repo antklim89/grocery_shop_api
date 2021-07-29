@@ -17,11 +17,6 @@
       "model": "user",
       "via": "orders"
     },
-    "products": {
-      "collection": "products",
-      "via": "orders",
-      "dominant": true
-    },
     "name": {
       "type": "string",
       "required": true,
@@ -65,6 +60,10 @@
     "uid": {
       "type": "uid",
       "required": false
+    },
+    "carts": {
+      "via": "order",
+      "collection": "cart"
     }
   }
 }

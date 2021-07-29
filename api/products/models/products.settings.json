@@ -79,9 +79,9 @@
       "via": "products",
       "model": "category"
     },
-    "orders": {
-      "via": "products",
-      "collection": "order"
+    "cart": {
+      "via": "product",
+      "model": "cart"
     }
   }
 }
