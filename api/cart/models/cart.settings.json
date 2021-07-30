@@ -25,6 +25,11 @@
     "order": {
       "via": "carts",
       "model": "order"
+    },
+    "user": {
+      "plugin": "users-permissions",
+      "model": "user",
+      "via": "carts"
     }
   }
 }
