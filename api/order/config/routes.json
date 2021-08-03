@@ -9,6 +9,14 @@
       }
     },
     {
+      "method": "POST",
+      "path": "/orders/confirm/:id",
+      "handler": "order.confirm",
+      "config": {
+        "policies": []
+      }
+    },
+    {
       "method": "GET",
       "path": "/orders/:id",
       "handler": "order.findOne",

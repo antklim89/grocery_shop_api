@@ -17,6 +17,14 @@
       }
     },
     {
+      "method": "POST",
+      "path": "/carts/refresh",
+      "handler": "cart.refresh",
+      "config": {
+        "policies": []
+      }
+    },
+    {
       "method": "GET",
       "path": "/carts/:id",
       "handler": "cart.findOne",
