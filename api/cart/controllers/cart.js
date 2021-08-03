@@ -32,7 +32,16 @@ module.exports = {
 
         const entity = await strapi.services.cart.create({ ...body, user: user.id });
         return sanitizeEntity(entity, { model: strapi.models.cart });
-      },
+    },
+
+    async update(ctx) {
+        const { id } = ctx.params;
+        const { body } = ctx.request
+        const { user } = ctx.state
+
+        const entity = await strapi.services.cart.update({ id, user: user.id }, { ...body });
+        return sanitizeEntity(entity, { model: strapi.models.cart });
+    },
 
     async refresh(ctx) {
         const newCartItems = ctx.request.body
