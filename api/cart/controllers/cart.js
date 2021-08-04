@@ -48,23 +48,24 @@ module.exports = {
         const newCartItems = ctx.request.body
         const { user } = ctx.state
 
+        
         const prevCartItems = await strapi.services.cart.find({ user: user.id })
-
-        if (!Array.isArray(newCartItems)) throw new Error('Body should be array.')
-
-        const entities = await Promise.all(newCartItems.map(async (newItem) => {
-            const cartInDB = prevCartItems.find((i) => i.product.id == newItem.product)
-            if (cartInDB) return;
-
-            const createdCartItem = await strapi.services.cart.create({
-                qty: newItem.qty,
-                product: newItem.product,
-                user: user.id
-            })
-            prevCartItems.push(createdCartItem);
-        }))
-
-        return prevCartItems.map((entity) => {
+        
+        if (Array.isArray(newCartItems)) {
+            const entities = await Promise.all(newCartItems.map(async (newItem) => {
+                const cartInDB = prevCartItems.find((i) => i.product.id == newItem.product)
+                if (cartInDB) return;
+    
+                const createdCartItem = await strapi.services.cart.create({
+                    qty: newItem.qty,
+                    product: newItem.product,
+                    user: user.id
+                })
+                prevCartItems.push(createdCartItem);
+            }))
+        }
+        
+        return prevCartItems.filter((i) => !!i.product).map((entity) => {
             const product = {
                 ..._.omit(entity.product, ['description', 'mainImage', 'images']),
                 images: [entity.product.images[0]]
