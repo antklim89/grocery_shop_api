@@ -1,6 +1,7 @@
 'use strict';
 
 const { sanitizeEntity } = require("strapi-utils");
+const _ = require("lodash");
 
 /**
  * Read the documentation (https://strapi.io/documentation/developer-docs/latest/development/backend-customization.html#core-controllers)
@@ -49,19 +50,30 @@ module.exports = {
 
         const prevCartItems = await strapi.services.cart.find({ user: user.id })
 
-        if (Array.isArray(newCartItems)) {
-            const entities = await Promise.all(newCartItems.map(async (newItem) => {
-                const cartInDB = prevCartItems.find((i) => i.product.id == newItem.product)
-                if (cartInDB) return;
+        if (!Array.isArray(newCartItems)) throw new Error('Body should be array.')
 
-                const createdCartItem = await strapi.services.cart.create({
-                    qty: newItem.qty,
-                    product: newItem.product,
-                    user: user.id
-                })
-                prevCartItems.push(createdCartItem);
-            }))
-            return prevCartItems.map((entity) => sanitizeEntity(entity, { model: strapi.models.cart }))
-        }
+        const entities = await Promise.all(newCartItems.map(async (newItem) => {
+            const cartInDB = prevCartItems.find((i) => i.product.id == newItem.product)
+            if (cartInDB) return;
+
+            const createdCartItem = await strapi.services.cart.create({
+                qty: newItem.qty,
+                product: newItem.product,
+                user: user.id
+            })
+            prevCartItems.push(createdCartItem);
+        }))
+
+        return prevCartItems.map((entity) => {
+            const product = {
+                ..._.omit(entity.product, ['description', 'mainImage', 'images']),
+                images: [entity.product.images[0]]
+            };
+            const id = entity.id;
+            const qty = entity.qty;
+
+            return sanitizeEntity({ id, qty, product }, { model: strapi.models.cart })
+        })
+        
     }
 };
