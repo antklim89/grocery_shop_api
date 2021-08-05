@@ -45,14 +45,14 @@ module.exports = {
     },
 
     async refresh(ctx) {
-        const newCartItems = ctx.request.body
+        const { body } = ctx.request
         const { user } = ctx.state
 
         
         const prevCartItems = await strapi.services.cart.find({ user: user.id })
         
-        if (Array.isArray(newCartItems)) {
-            const entities = await Promise.all(newCartItems.map(async (newItem) => {
+        if (Array.isArray(body)) {
+            await Promise.all(body.map(async (newItem) => {
                 const cartInDB = prevCartItems.find((i) => i.product.id == newItem.product)
                 if (cartInDB) return;
     
@@ -65,16 +65,17 @@ module.exports = {
             }))
         }
         
-        return prevCartItems.filter((i) => !!i.product).map((entity) => {
-            const product = {
-                ..._.omit(entity.product, ['description', 'mainImage', 'images']),
-                images: [entity.product.images[0]]
-            };
-            const id = entity.id;
-            const qty = entity.qty;
-
-            return sanitizeEntity({ id, qty, product }, { model: strapi.models.cart })
-        })
+        return prevCartItems
+            .filter((i) => i.product)
+            .map(({ id, qty, product }) => ({
+                id,
+                qty,
+                product: {
+                    ..._.omit(product, ['description', 'mainImage', 'images']),
+                    images: [product.images[0]]
+                }
+            }))
+            .map((entity) => sanitizeEntity(entity, { model: strapi.models.cart }))
         
     }
 };

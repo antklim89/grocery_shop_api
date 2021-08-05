@@ -1,5 +1,6 @@
 const { sanitizeEntity } = require('strapi-utils');
 
+
 module.exports = {
     async findOne(ctx) {
         const { id } = ctx.params;
