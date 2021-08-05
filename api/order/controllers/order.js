@@ -20,9 +20,9 @@ module.exports = {
 
     async confirm(ctx) {
         const { id } = ctx.params;
-        
+
         await strapi.services.order.update({ id }, { status: 'processing' });
-        return true
+        return true;
     },
 };
- 
+

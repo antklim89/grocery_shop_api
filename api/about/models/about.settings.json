@@ -1,13 +1,13 @@
 {
-  "kind": "collectionType",
-  "collectionName": "features",
+  "kind": "singleType",
+  "collectionName": "about",
   "info": {
-    "name": "features"
+    "name": "About"
   },
   "options": {
     "increments": true,
     "timestamps": true,
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {
@@ -16,8 +16,8 @@
       "required": true,
       "maxLength": 200
     },
-    "feature": {
-      "type": "text",
+    "body": {
+      "type": "richtext",
       "required": true
     },
     "image": {

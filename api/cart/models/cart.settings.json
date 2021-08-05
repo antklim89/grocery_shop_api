@@ -19,7 +19,7 @@
       "min": 0
     },
     "product": {
-      "model": "products",
+      "model": "product",
       "via": "cart"
     },
     "order": {

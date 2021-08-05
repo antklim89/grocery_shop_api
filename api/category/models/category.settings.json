@@ -21,7 +21,7 @@
     },
     "products": {
       "via": "category",
-      "collection": "products"
+      "collection": "product"
     }
   }
 }
