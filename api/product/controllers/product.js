@@ -1,12 +1,18 @@
+const faker = require('faker');
 const _ = require('lodash');
 
 
 module.exports = {
     async devdata() {
-        const categoryList = ['vegetable', 'fruit', 'juiсу', 'berry'];
-        const countryList = ['Russia', 'Egypt', 'Spain', 'India'];
-        const productList = ['Tomato', 'Potato', 'Carrot', 'Beet', 'Apple', 'Apple juice', 'Grape'];
+        const categoryList = _.uniq(_.times(10, faker.commerce.productMaterial));
+        const countryList = _.uniq(_.times(10, faker.address.country));
+        const productList = _.uniq(_.times(50, faker.commerce.productName));
+        const measures = ['kilogram', 'gram', 'liter', 'mililiter', 'piece', 'ton'];
+        const units = [1, 10, 100, 1000, 250, 50, 500];
 
+        const images = await strapi.connections.default.raw(
+            'SELECT id FROM upload_file;',
+        );
 
         await strapi.services.category.delete({});
         const categories = await Promise.all(categoryList.map((category) => (
@@ -22,18 +28,17 @@ module.exports = {
         await Promise.all(productList.map((product) => (
             strapi.services.product.create({
                 name: product,
-                description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+                description: faker.commerce.productDescription(),
                 price: _.random(10, 100, false),
-                discount: _.random(0, 80, false),
-                measure: 'kilogram',
-                unit: 1,
+                discount: _.random(0, 100) > 50 ? _.random(0, 80, false) : 0,
+                measure: _.sample(measures),
+                unit: _.sample(units),
                 country: _.sample(_.map(countries, 'id')),
                 category: _.sample(_.map(categories, 'id')),
-                mainImage: 11,
-                images: [16, 11],
+                mainImage: _.sample(images),
+                images: _.sampleSize(_.map(images, 'id'), 3),
             })
         )));
-
 
         return true;
     },
