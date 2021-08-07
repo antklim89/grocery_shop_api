@@ -1,12 +1,6 @@
-
-
 const _ = require('lodash');
 const { sanitizeEntity } = require('strapi-utils');
 
-/**
- * Read the documentation (https://strapi.io/documentation/developer-docs/latest/development/backend-customization.html#core-controllers)
- * to customize this controller
- */
 
 module.exports = {
     async find(ctx) {
@@ -53,7 +47,7 @@ module.exports = {
 
         if (Array.isArray(body)) {
             await Promise.all(body.map(async (newItem) => {
-                const cartInDB = prevCartItems.find((i) => i.product.id == newItem.product);
+                const cartInDB = prevCartItems.find((i) => +i.product.id === +newItem.product);
                 if (cartInDB) return;
 
                 const createdCartItem = await strapi.services.cart.create({

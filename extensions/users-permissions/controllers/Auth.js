@@ -1,4 +1,4 @@
-const orginalUserController = require('strapi-plugin-users-permissions/controllers/Auth')
+// const orginalUserController = require('strapi-plugin-users-permissions/controllers/Auth');
 
 
 module.exports = {
@@ -14,4 +14,4 @@ module.exports = {
     //     console.debug('callback', result)
     //     return result
     // }
-}
+};

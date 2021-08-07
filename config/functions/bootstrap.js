@@ -1,4 +1,4 @@
-'use strict';
+
 
 /**
  * An asynchronous bootstrap function that runs before
