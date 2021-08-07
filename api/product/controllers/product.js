@@ -7,6 +7,14 @@ module.exports = {
         const categoryList = _.uniq(_.times(10, faker.commerce.productMaterial));
         const countryList = _.uniq(_.times(10, faker.address.country));
         const productList = _.uniq(_.times(50, faker.commerce.productName));
+        const featureList = [
+            'Fresh Vegies & Fruits',
+            'Locally Grown Vegetables',
+            'Natural As It\'s In Nature',
+            'From Country Side',
+            'Alkaline Water',
+            'Fresh Air',
+        ];
         const measures = ['kilogram', 'gram', 'liter', 'mililiter', 'piece', 'ton'];
         const units = [1, 10, 100, 1000, 250, 50, 500];
 
@@ -37,6 +45,15 @@ module.exports = {
                 category: _.sample(_.map(categories, 'id')),
                 mainImage: _.sample(images),
                 images: _.sampleSize(_.map(images, 'id'), 3),
+            })
+        )));
+
+        await strapi.services.feature.delete({});
+        await Promise.all(featureList.map((feature) => (
+            strapi.services.feature.create({
+                title: feature,
+                feature: faker.lorem.sentences(5),
+                image: _.sample(_.map(images, 'id')),
             })
         )));
 
