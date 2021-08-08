@@ -66,6 +66,10 @@
     "carts": {
       "via": "user",
       "collection": "cart"
+    },
+    "profile": {
+      "via": "user",
+      "model": "profile"
     }
   }
 }

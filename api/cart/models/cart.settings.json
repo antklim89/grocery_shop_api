@@ -27,9 +27,9 @@
       "model": "order"
     },
     "user": {
+      "via": "carts",
       "plugin": "users-permissions",
-      "model": "user",
-      "via": "carts"
+      "model": "user"
     }
   }
 }
