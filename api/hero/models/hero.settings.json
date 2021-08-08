@@ -2,7 +2,8 @@
   "kind": "singleType",
   "collectionName": "heroes",
   "info": {
-    "name": "Hero"
+    "name": "Hero",
+    "description": ""
   },
   "options": {
     "increments": true,
@@ -14,11 +15,13 @@
     "title": {
       "type": "string",
       "required": true,
-      "maxLength": 200
+      "maxLength": 200,
+      "default": "100% natural"
     },
     "text": {
       "type": "text",
-      "required": true
+      "required": true,
+      "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     },
     "image": {
       "model": "file",
@@ -29,6 +32,12 @@
       "plugin": "upload",
       "required": true,
       "pluginOptions": {}
+    },
+    "secondText": {
+      "type": "string",
+      "maxLength": 500,
+      "required": true,
+      "default": "fresh & non-gmo products"
     }
   }
 }
