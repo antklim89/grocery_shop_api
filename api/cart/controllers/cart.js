@@ -10,7 +10,7 @@ module.exports = {
             ? await strapi.services.cart.search({ ...ctx.query, user: user.id })
             : await strapi.services.cart.find({ ...ctx.query, user: user.id });
 
-        return entities.map((entity) => sanitizeEntity(entity, { model: strapi.models.cart }));
+        return entities.filter((i) => i.product).map((entity) => sanitizeEntity(entity, { model: strapi.models.cart }));
     },
 
     async findOne(ctx) {
@@ -42,11 +42,11 @@ module.exports = {
         const { body } = ctx.request;
         const { user } = ctx.state;
 
-
-        const prevCartItems = await strapi.services.cart.find({ user: user.id });
+        const prevCartItems = (await strapi.services.cart.find({ user: user.id })).filter((i) => i.product);
 
         if (Array.isArray(body)) {
             await Promise.all(body.map(async (newItem) => {
+                if (!newItem.product) return;
                 const cartInDB = prevCartItems.find((i) => +i.product.id === +newItem.product);
                 if (cartInDB) return;
 
