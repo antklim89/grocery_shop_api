@@ -67,9 +67,21 @@
       "via": "user",
       "collection": "cart"
     },
-    "profile": {
-      "via": "user",
-      "model": "profile"
+    "name": {
+      "type": "string",
+      "maxLength": 200
+    },
+    "surname": {
+      "type": "string",
+      "maxLength": 200
+    },
+    "phone": {
+      "type": "string",
+      "maxLength": 200
+    },
+    "address": {
+      "type": "string",
+      "maxLength": 1000
     }
   }
 }

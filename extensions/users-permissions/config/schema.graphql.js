@@ -1,12 +1,18 @@
 module.exports = {
     definition: `
         extend type UsersPermissionsMe {
-            profile: Profile
+            name: String
+            surname: String
+            phone: String
+            address: String
         }
     `,
     resolver: {
         UsersPermissionsMe: {
-            profile: ({ profile }) => strapi.services.profile.findOne({ id: profile }),
+            name: (user) => user.name,
+            surname: (user) => user.surname,
+            phone: (user) => user.phone,
+            address: (user) => user.address,
         },
     },
 };
