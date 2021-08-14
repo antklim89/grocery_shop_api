@@ -9,9 +9,6 @@ module.exports = {
                 return strapi.query('cart').delete({ id: cartItem.id });
             }));
         },
-        async afterFindOne(...args) {
-            console.debug('afterFindOne: \n', args);
-        },
     },
 };
 
