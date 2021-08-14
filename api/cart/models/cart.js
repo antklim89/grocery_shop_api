@@ -1,8 +1,17 @@
 
 
-/**
- * Read the documentation (https://strapi.io/documentation/developer-docs/latest/development/backend-customization.html#lifecycle-hooks)
- * to customize this model
- */
+module.exports = {
+    lifecycles: {
+        async afterFind(data) {
+            await Promise.all(data.map((cartItem, index) => {
+                if (cartItem.product?.id) return null;
+                data.splice(index, 1);
+                return strapi.query('cart').delete({ id: cartItem.id });
+            }));
+        },
+        async afterFindOne(...args) {
+            console.debug('afterFindOne: \n', args);
+        },
+    },
+};
 
-module.exports = {};

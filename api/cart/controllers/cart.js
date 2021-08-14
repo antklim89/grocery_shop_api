@@ -42,13 +42,13 @@ module.exports = {
         const { body } = ctx.request;
         const { user } = ctx.state;
 
-        const prevCartItems = (await strapi.services.cart.find({ user: user.id })).filter((i) => i.product);
+        const prevCartItems = (await strapi.services.cart.find({ user: user.id }));
 
         if (Array.isArray(body)) {
             await Promise.all(body.map(async (newItem) => {
-                if (!newItem.product) return;
+                if (!newItem.product) return null;
                 const cartInDB = prevCartItems.find((i) => +i.product.id === +newItem.product);
-                if (cartInDB) return;
+                if (cartInDB) return null;
 
                 const createdCartItem = await strapi.services.cart.create({
                     qty: newItem.qty,
@@ -56,11 +56,11 @@ module.exports = {
                     user: user.id,
                 });
                 prevCartItems.push(createdCartItem);
+                return null;
             }));
         }
 
         return prevCartItems
-            .filter((i) => i.product)
             .map(({ id, qty, product }) => ({
                 id,
                 qty,

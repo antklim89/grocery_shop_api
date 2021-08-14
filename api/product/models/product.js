@@ -1,12 +1,24 @@
 
 
+function createOrUpdate(data) {
+    data.discountPrice = data.price - ((data.price / 100) * data.discount);
+    if (!data.category) {
+        throw new Error('Category is required');
+    }
+    if (!data.country) {
+        throw new Error('Country is required');
+    }
+}
+
+
 module.exports = {
     lifecycles: {
         beforeCreate(data) {
-            data.discountPrice = data.price - ((data.price / 100) * data.discount);
+            createOrUpdate(data);
         },
         beforeUpdate(params, data) {
-            data.discountPrice = data.price - ((data.price / 100) * data.discount);
+            createOrUpdate(data);
         },
     },
 };
+
