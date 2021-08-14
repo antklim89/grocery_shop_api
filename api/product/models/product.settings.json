@@ -84,7 +84,7 @@
       "model": "cart"
     },
     "discountPrice": {
-      "type": "integer",
+      "type": "decimal",
       "min": 0
     }
   }

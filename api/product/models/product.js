@@ -1,10 +1,12 @@
 
 
 module.exports = {
-    beforeSave(...data) {
-        console.debug('data: \n', ...data);
-    },
-    beforeUpdate(...data) {
-        console.debug('data: \n', ...data);
+    lifecycles: {
+        beforeCreate(data) {
+            data.discountPrice = data.price - ((data.price / 100) * data.discount);
+        },
+        beforeUpdate(params, data) {
+            data.discountPrice = data.price - ((data.price / 100) * data.discount);
+        },
     },
 };
