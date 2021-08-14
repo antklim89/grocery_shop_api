@@ -82,6 +82,10 @@
     "cart": {
       "via": "product",
       "model": "cart"
+    },
+    "discountPrice": {
+      "type": "integer",
+      "min": 0
     }
   }
 }

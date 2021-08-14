@@ -5,4 +5,16 @@
  * to customize this model
  */
 
-module.exports = {};
+module.exports = {
+    lifecycles: {
+        beforeSave(...data) {
+            console.debug('beforeSave: \n', ...data);
+        },
+        beforeCreate(...data) {
+            console.debug('beforeCreate: \n', ...data);
+        },
+        beforeUpdate(...data) {
+            console.debug('beforeUpdate: \n', ...data);
+        },
+    },
+};
