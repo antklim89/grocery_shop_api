@@ -15,8 +15,8 @@ module.exports = {
             'Alkaline Water',
             'Fresh Air',
         ];
-        const measures = ['kilogram', 'gram', 'liter', 'mililiter', 'piece', 'ton'];
-        const units = [1, 10, 100, 1000, 250, 50, 500];
+        const unit = ['kilogram', 'gram', 'liter', 'mililiter', 'piece', 'ton'];
+        const quantityPerUnit = [1, 10, 100, 1000, 250, 50, 500];
 
         const images = await strapi.connections.default.raw(
             'SELECT id FROM upload_file;',
@@ -42,8 +42,8 @@ module.exports = {
                 description: faker.commerce.productDescription(),
                 price: _.random(10, 100, false),
                 discount: _.random(0, 100) > 50 ? _.random(0, 80, false) : 0,
-                measure: _.sample(measures),
-                unit: _.sample(units),
+                unit: _.sample(unit),
+                quantityPerUnit: _.sample(quantityPerUnit),
                 country: _.sample(_.map(countries, 'id')),
                 category: _.sample(_.map(categories, 'id')),
                 mainImage: _.sample(images),
@@ -59,6 +59,19 @@ module.exports = {
                 image: _.sample(_.map(images, 'id')),
             })
         )));
+
+        await strapi.services.about.createOrUpdate({
+            title: 'About Us',
+            body: faker.lorem.sentences(7),
+            image: _.sample(_.map(images, 'id')),
+        });
+
+        await strapi.services.hero.createOrUpdate({
+            title: '100% NATURAL!',
+            text: faker.lorem.sentences(7),
+            image: _.sample(_.map(images, 'id')),
+            secondText: 'fresh & non-gmo products',
+        });
 
         return true;
     },

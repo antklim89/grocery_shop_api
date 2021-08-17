@@ -52,7 +52,7 @@
       "min": 0,
       "max": 100
     },
-    "measure": {
+    "unit": {
       "type": "enumeration",
       "enum": [
         "kilogram",
@@ -65,7 +65,7 @@
       "default": "kilogram",
       "required": true
     },
-    "unit": {
+    "quantityPerUnit": {
       "type": "decimal",
       "required": true,
       "min": 0,
