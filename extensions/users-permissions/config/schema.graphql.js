@@ -6,6 +6,9 @@ module.exports = {
             phone: String
             address: String
         }
+        extend input editUserInput {
+            oldPassword: String
+        }
     `,
     resolver: {
         UsersPermissionsMe: {
