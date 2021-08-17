@@ -50,13 +50,12 @@ module.exports = {
                 const cartInDB = prevCartItems.find((i) => +i.product.id === +newItem.product);
                 if (cartInDB) return null;
 
-                const createdCartItem = await strapi.services.cart.create({
-                    qty: newItem.qty,
-                    product: newItem.product,
-                    user: user.id,
-                });
-                prevCartItems.push(createdCartItem);
-                return null;
+                try {
+                    const createdCartItem = await strapi.services.cart.create({ ...newItem, user: user.id });
+                    return prevCartItems.push(createdCartItem);
+                } catch (error) {
+                    return null;
+                }
             }));
         }
 

@@ -22,6 +22,9 @@ module.exports = {
             'SELECT id FROM upload_file;',
         );
 
+        await strapi.services.order.delete({});
+        await strapi.services.cart.delete({});
+
         await strapi.services.category.delete({});
         const categories = await Promise.all(categoryList.map((category) => (
             strapi.services.category.create({ name: category })

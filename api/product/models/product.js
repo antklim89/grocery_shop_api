@@ -1,11 +1,11 @@
 
 
-function createOrUpdate(data) {
-    data.discountPrice = data.price - ((data.price / 100) * data.discount);
-    if (!data.category) {
+function createOrUpdate(product) {
+    product.discountPrice = product.price - ((product.price / 100) * product.discount);
+    if ('category' in product && !product.category) {
         throw new Error('Category is required');
     }
-    if (!data.country) {
+    if ('country' in product && !product.country) {
         throw new Error('Country is required');
     }
 }
@@ -13,11 +13,14 @@ function createOrUpdate(data) {
 
 module.exports = {
     lifecycles: {
-        beforeCreate(data) {
-            createOrUpdate(data);
+        beforeCreate(product) {
+            createOrUpdate(product);
         },
-        beforeUpdate(params, data) {
-            createOrUpdate(data);
+        beforeUpdate(params, product) {
+            createOrUpdate(product);
+        },
+        async beforeDelete(product) {
+            await strapi.query('cart').delete({ product: product.id });
         },
     },
 };

@@ -1,0 +1,20 @@
+// module.exports = (strapi) => {
+//     const hook = {
+//         /**
+//        * Default options
+//        */
+
+//         defaults: {
+//         // config object
+//         },
+
+//         /**
+//        * Initialize the hook
+//        */
+
+//         async initialize() {
+//             console.debug('HOOK');
+//         },
+//     };
+//     return hook;
+// };
