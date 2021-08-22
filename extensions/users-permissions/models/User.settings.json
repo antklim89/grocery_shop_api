@@ -69,15 +69,18 @@
     },
     "name": {
       "type": "string",
-      "maxLength": 200
+      "maxLength": 200,
+      "regex": "^[a-zA-Z-']*$"
     },
     "surname": {
       "type": "string",
-      "maxLength": 200
+      "maxLength": 200,
+      "regex": "^[a-zA-Z-']*$"
     },
     "phone": {
       "type": "string",
-      "maxLength": 200
+      "maxLength": 200,
+      "regex": "[\\d-]*$"
     },
     "address": {
       "type": "string",
