@@ -61,9 +61,11 @@
       "type": "uid",
       "required": false
     },
-    "carts": {
-      "via": "order",
-      "collection": "cart"
+    "orderedProducts": {
+      "type": "component",
+      "repeatable": true,
+      "component": "order.ordered-product",
+      "min": 1
     }
   }
 }

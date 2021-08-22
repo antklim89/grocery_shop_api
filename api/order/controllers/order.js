@@ -21,6 +21,8 @@ module.exports = {
         const { user } = ctx.state;
 
         const entity = await strapi.services.order.create({ ...body, user: user.id });
+        await strapi.services.cart.delete({ id_in: body.carts });
+
         return sanitizeEntity(entity, { model: strapi.models.order });
     },
 

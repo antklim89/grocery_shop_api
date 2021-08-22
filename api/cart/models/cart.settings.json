@@ -22,10 +22,6 @@
       "via": "cart",
       "model": "product"
     },
-    "order": {
-      "via": "carts",
-      "model": "order"
-    },
     "user": {
       "via": "carts",
       "plugin": "users-permissions",
