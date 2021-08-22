@@ -20,13 +20,15 @@
     "name": {
       "type": "string",
       "required": true,
-      "minLength": 2,
-      "maxLength": 200
+      "minLength": 3,
+      "maxLength": 200,
+      "regex": "^[a-zA-Z-']*$"
     },
     "surname": {
       "type": "string",
       "maxLength": 200,
-      "minLength": 3
+      "minLength": 3,
+      "regex": "^[a-zA-Z-']*$"
     },
     "email": {
       "type": "string",
@@ -37,14 +39,15 @@
     "address": {
       "type": "string",
       "required": true,
-      "maxLength": 500,
+      "maxLength": 2000,
       "minLength": 5
     },
     "phone": {
       "type": "string",
       "required": true,
-      "maxLength": 100,
-      "minLength": 5
+      "maxLength": 200,
+      "minLength": 3,
+      "regex": "^[\\d-]*$"
     },
     "status": {
       "type": "enumeration",

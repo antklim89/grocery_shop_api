@@ -80,11 +80,11 @@
     "phone": {
       "type": "string",
       "maxLength": 200,
-      "regex": "[\\d-]*$"
+      "regex": "^[\\d-]*$"
     },
     "address": {
       "type": "string",
-      "maxLength": 1000
+      "maxLength": 2000
     }
   }
 }
