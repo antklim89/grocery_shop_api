@@ -22,7 +22,7 @@ module.exports = {
             'SELECT id FROM upload_file;',
         );
 
-        // console.debug(': \n', images)
+        console.debug(': \n', images);
 
         // await strapi.services.order.delete({});
         // await strapi.services.cart.delete({});
