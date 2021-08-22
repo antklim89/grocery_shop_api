@@ -38,6 +38,15 @@ module.exports = {
         return sanitizeEntity(entity, { model: strapi.models.cart });
     },
 
+    async delete(ctx) {
+        const { id } = ctx.params;
+        const { user } = ctx.state;
+
+        const entity = await strapi.services.cart.delete({ id, user: user.id });
+
+        return sanitizeEntity(entity, { model: strapi.models.order });
+    },
+
     async refresh(ctx) {
         const { body } = ctx.request;
         const { user } = ctx.state;
