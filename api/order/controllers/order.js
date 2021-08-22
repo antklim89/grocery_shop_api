@@ -2,6 +2,12 @@ const { sanitizeEntity } = require('strapi-utils');
 
 
 module.exports = {
+    async find(ctx) {
+        const { user } = ctx.state;
+
+        const entity = await strapi.services.order.find({ ...ctx.query, user: user.id });
+        return sanitizeEntity(entity, { model: strapi.models.order });
+    },
     async findOne(ctx) {
         const { id } = ctx.params;
         const { user } = ctx.state;
