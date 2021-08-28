@@ -34,7 +34,8 @@
       "type": "string",
       "required": true,
       "maxLength": 200,
-      "minLength": 3
+      "minLength": 3,
+      "regex": "^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$"
     },
     "address": {
       "type": "string",
