@@ -51,7 +51,9 @@ module.exports = {
         const { body } = ctx.request;
         const { user } = ctx.state;
 
-        const prevCartItems = (await strapi.services.cart.find({ user: user.id }));
+        const prevCartItems = await strapi.services.cart.find({ user: user.id });
+
+        console.debug('body: \n', body);
 
         if (Array.isArray(body)) {
             await Promise.all(body.map(async (newItem) => {
@@ -69,8 +71,8 @@ module.exports = {
         }
 
         return prevCartItems
-            .map(({ product, cart }) => ({
-                ...cart,
+            .map(({ product, ...cart }) => ({
+                ..._.pick(cart, ['id', 'qty', 'inOrder']),
                 product: {
                     ..._.omit(product, ['description', 'mainImage', 'images']),
                     images: [product.images[0]],
