@@ -11,11 +11,8 @@
  */
 
 module.exports = {
-    /**
-   * Simple example.
-   * Every monday at 1am.
-   */
-    // '0 1 * * 1': () => {
-    //
-    // }
+    // '*/5 * * * * *': async () => {
+    //     const orders = await strapi.services.order.find({ id: 48 });
+    //     console.debug(orders.map((i) => i.created_at.getTime()));
+    // },
 };
