@@ -1,9 +1,7 @@
+const _ = require('lodash');
 
 
 async function updateOrCreate(data) {
-    if ('product' in data && !data.product) {
-        throw new Error('Product is required');
-    }
     const product = await strapi.query('product').findOne({ id: data.product });
 
     if (!product) {
@@ -13,11 +11,19 @@ async function updateOrCreate(data) {
 
 module.exports = {
     lifecycles: {
-        async beforeCreate(cartInput) {
-            await updateOrCreate(cartInput);
+        async beforeCreate(data) {
+            if (_.isNil(data.product)) {
+                throw new Error('Product is required');
+            }
+            await updateOrCreate(data);
         },
-        async beforeUpdate(filter, cartInput) {
-            await updateOrCreate(cartInput);
+        async beforeUpdate(filter, data) {
+            if ('product' in data && _.isNil(data.product)) {
+                throw new Error('Product is required');
+            }
+            if ('product' in data) {
+                await updateOrCreate(data);
+            }
         },
     },
 };

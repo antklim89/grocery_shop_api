@@ -56,7 +56,7 @@ module.exports = {
         if (Array.isArray(body)) {
             await Promise.all(body.map(async (newItem) => {
                 if (!newItem.product) return null;
-                const cartInDB = prevCartItems.find((i) => +i.product.id === +newItem.product);
+                const cartInDB = prevCartItems.find((i) => +i.product?.id === +newItem.product);
                 if (cartInDB) return null;
 
                 try {
