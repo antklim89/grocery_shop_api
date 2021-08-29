@@ -53,8 +53,6 @@ module.exports = {
 
         const prevCartItems = await strapi.services.cart.find({ user: user.id });
 
-        console.debug('body: \n', body);
-
         if (Array.isArray(body)) {
             await Promise.all(body.map(async (newItem) => {
                 if (!newItem.product) return null;
@@ -71,6 +69,7 @@ module.exports = {
         }
 
         return prevCartItems
+            .filter(({ product }) => product?.id)
             .map(({ product, ...cart }) => ({
                 ..._.pick(cart, ['id', 'qty', 'inOrder']),
                 product: {
