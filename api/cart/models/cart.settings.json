@@ -26,6 +26,11 @@
       "via": "carts",
       "plugin": "users-permissions",
       "model": "user"
+    },
+    "inOrder": {
+      "type": "boolean",
+      "default": true,
+      "required": true
     }
   }
 }

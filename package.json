@@ -32,7 +32,8 @@
         "strapi-plugin-upload": "3.6.5",
         "strapi-plugin-users-permissions": "3.6.5",
         "strapi-provider-upload-uploadcare": "^0.2.4",
-        "strapi-utils": "3.6.5"
+        "strapi-utils": "3.6.5",
+        "uuid": "^8.3.2"
     },
     "author": {
         "name": "A Strapi developer"

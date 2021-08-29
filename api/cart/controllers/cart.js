@@ -69,9 +69,8 @@ module.exports = {
         }
 
         return prevCartItems
-            .map(({ id, qty, product }) => ({
-                id,
-                qty,
+            .map(({ product, cart }) => ({
+                ...cart,
                 product: {
                     ..._.omit(product, ['description', 'mainImage', 'images']),
                     images: [product.images[0]],

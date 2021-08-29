@@ -9,10 +9,10 @@ module.exports = {
         return sanitizeEntity(entity, { model: strapi.models.order });
     },
     async findOne(ctx) {
-        const { id } = ctx.params;
+        const { id: uid } = ctx.params;
         const { user } = ctx.state;
 
-        const entity = await strapi.services.order.findOne({ id, user: user.id });
+        const entity = await strapi.services.order.findOne({ uid, user: user.id });
         return sanitizeEntity(entity, { model: strapi.models.order });
     },
 
@@ -20,26 +20,30 @@ module.exports = {
         const { body } = ctx.request;
         const { user } = ctx.state;
 
-        const entity = await strapi.services.order.create({ ...body, user: user.id });
-        await strapi.services.cart.delete({ id_in: body.carts });
+        const cartItems = await strapi.services.cart.find({ inOrder: true, user: user.id });
+        const orderedProducts = cartItems.map(({ qty, product }) => ({ qty, product: product.id }));
+        if (orderedProducts.length === 0) return ctx.throw('No products in cart.');
+
+        const entity = await strapi.services.order.create({ ...body, user: user.id, orderedProducts });
 
         return sanitizeEntity(entity, { model: strapi.models.order });
     },
 
     async delete(ctx) {
-        const { id } = ctx.params;
+        const { id: uid } = ctx.params;
         const { user } = ctx.state;
 
-        const entity = await strapi.services.order.delete({ id, user: user.id, status: 'draft' });
+        const entity = await strapi.services.order.delete({ uid, user: user.id, status: 'draft' });
 
         return sanitizeEntity(entity, { model: strapi.models.order });
     },
 
     async confirm(ctx) {
-        const { id } = ctx.params;
+        const { id: uid } = ctx.params;
+        const { user } = ctx.state;
 
-        await strapi.services.order.update({ id }, { status: 'processing' });
+        await strapi.services.order.update({ uid }, { status: 'processing' });
+        await strapi.services.cart.delete({ inOrder: true, user: user.id });
         return true;
     },
 };
-
