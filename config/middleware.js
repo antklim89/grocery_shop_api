@@ -1,9 +1,3 @@
 
 
-module.exports = {
-    settings: {
-        gzip: {
-            enabled: true,
-        },
-    },
-};
+module.exports = { settings: { gzip: { enabled: true } } };

@@ -18,14 +18,6 @@
     },
     {
       "method": "GET",
-      "path": "/countries/enumerate",
-      "handler": "country.enumerate",
-      "config": {
-        "policies": []
-      }
-    },
-    {
-      "method": "GET",
       "path": "/countries/:id",
       "handler": "country.findOne",
       "config": {

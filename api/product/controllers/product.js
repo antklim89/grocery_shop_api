@@ -18,13 +18,9 @@ module.exports = {
         const unit = ['kilogram', 'gram', 'liter', 'mililiter', 'piece', 'ton'];
         const quantityPerUnit = [1, 10, 100, 1000, 250, 50, 500];
 
-        const imagesData = await strapi.connections.default.raw(
-            'SELECT id FROM upload_file;',
-        );
+        const imagesData = await strapi.connections.default.raw('SELECT id FROM upload_file;');
 
         const images = imagesData.rows || imagesData;
-
-        console.debug(': \n', images);
 
         await strapi.services.order.delete({});
         await strapi.services.cart.delete({});

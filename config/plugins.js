@@ -1,6 +1,1 @@
-module.exports = () => ({
-    graphql: {
-        // endpoint: '/__graphql',
-        // playgroundAlways: false,
-    },
-});
+module.exports = () => ({ graphql: {} });

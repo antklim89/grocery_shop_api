@@ -10,7 +10,9 @@ module.exports = {
             ? await strapi.services.cart.search({ ...ctx.query, user: user.id })
             : await strapi.services.cart.find({ ...ctx.query, user: user.id });
 
-        return entities.filter((i) => i.product).map((entity) => sanitizeEntity(entity, { model: strapi.models.cart }));
+        return entities
+            .filter((entity) => entity.product)
+            .map((entity) => sanitizeEntity(entity, { model: strapi.models.cart }));
     },
 
     async findOne(ctx) {
@@ -56,7 +58,7 @@ module.exports = {
         if (Array.isArray(body)) {
             await Promise.all(body.map(async (newItem) => {
                 if (!newItem.product) return null;
-                const cartInDB = prevCartItems.find((i) => +i.product?.id === +newItem.product);
+                const cartInDB = prevCartItems.find((prItem) => Number(prItem.product?.id) === Number(newItem.product));
                 if (cartInDB) return null;
 
                 try {

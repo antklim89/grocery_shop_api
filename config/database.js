@@ -7,9 +7,7 @@ module.exports = ({ env }) => ({
                 client: 'sqlite',
                 filename: env('DATABASE_FILENAME', '.tmp/data.db'),
             },
-            options: {
-                useNullAsDefault: true,
-            },
+            options: { useNullAsDefault: true },
         },
     },
 });

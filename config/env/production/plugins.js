@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 module.exports = ({ env }) => ({
     upload: {
         provider: 'uploadcare',

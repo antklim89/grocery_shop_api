@@ -9,10 +9,9 @@
  *
  * See more details here: https://strapi.io/documentation/developer-docs/latest/setup-deployment-guides/configurations.html#cron-tasks
  */
+// '*/5 * * * * *': async () => {
+//     const orders = await strapi.services.order.find({ id: 48 });
+//     console.debug(orders.map((i) => i.created_at.getTime()));
+// },
 
-module.exports = {
-    // '*/5 * * * * *': async () => {
-    //     const orders = await strapi.services.order.find({ id: 48 });
-    //     console.debug(orders.map((i) => i.created_at.getTime()));
-    // },
-};
+module.exports = {};
