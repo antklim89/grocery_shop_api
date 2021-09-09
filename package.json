@@ -1,8 +1,8 @@
 {
-    "name": "grocery-shop-api",
-    "private": true,
-    "version": "0.1.0",
+    "name": "grocery-shop-backend",
+    "version": "1.0.0",
     "description": "A Strapi application",
+    "private": true,
     "scripts": {
         "dev": "strapi develop",
         "start": "strapi start",
@@ -41,15 +41,27 @@
         "strapi-utils": "3.6.5",
         "uuid": "^8.3.2"
     },
+    "repository": {
+      "type": "git",
+      "url": "git@github.com:antklim89/grocery_shop_api.git"
+    },
+    "bugs": {
+      "url": "https://github.com/antklim89/grocery_shop_api/issues"
+    },
+    "keywords": [
+      "strapi",
+      "grocery",
+      "shop"
+    ],
     "author": {
-        "name": "A Strapi developer"
+        "name": "Me"
     },
     "strapi": {
         "uuid": "a7b49186-c712-45d4-8da9-8acfe8f0454b"
     },
     "engines": {
-        "node": ">=10.16.0 <=14.x.x",
-        "npm": "^6.0.0"
+        "node": ">=10.16.0 <=16.x.x",
+        "npm": "^7.0.0"
     },
     "license": "MIT"
 }

@@ -1,3 +1,5 @@
-# Strapi application
+# Grocery shop backend
 
-A quick description of your strapi application
+A small online grocery shop created for training web development.
+
+* Strapi
