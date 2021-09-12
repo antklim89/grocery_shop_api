@@ -11,8 +11,9 @@
  */
 
 module.exports = {
-    '* * 12 * * *': async () => {
-        const expireDate = Date.now() - (1000 * 60 * 15);
-        const orders = await strapi.services.order.delete({ created_at_lt: expireDate, status: 'draft' });
-    },
+    // '* * 12 * * *': async () => {
+    //     console.log('CRONXXX');
+    //     const expireDate = Date.now() - (1000 * 60 * 15);
+    //     const orders = await strapi.services.order.delete({ created_at_lt: expireDate, status: 'draft' });
+    // },
 };
