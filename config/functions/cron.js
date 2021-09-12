@@ -9,9 +9,10 @@
  *
  * See more details here: https://strapi.io/documentation/developer-docs/latest/setup-deployment-guides/configurations.html#cron-tasks
  */
-// '*/5 * * * * *': async () => {
-//     const orders = await strapi.services.order.find({ id: 48 });
-//     console.debug(orders.map((i) => i.created_at.getTime()));
-// },
 
-module.exports = {};
+module.exports = {
+    '* * 12 * * *': async () => {
+        const expireDate = Date.now() - (1000 * 60 * 15);
+        const orders = await strapi.services.order.delete({ created_at_lt: expireDate, status: 'draft' });
+    },
+};

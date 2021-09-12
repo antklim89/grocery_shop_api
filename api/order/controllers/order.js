@@ -1,18 +1,28 @@
 const { sanitizeEntity } = require('strapi-utils');
 
 
+const MINUTES_15 = 1000 * 60 * 15;
+
 module.exports = {
     async find(ctx) {
         const { user } = ctx.state;
+        const expireDate = Date.now() - MINUTES_15;
 
-        const entity = await strapi.services.order.find({ ...ctx.query, user: user.id });
-        return sanitizeEntity(entity, { model: strapi.models.order });
+        const entities = await strapi.services.order.find({ ...ctx.query, user: user.id });
+
+        return entities
+            .filter((entity) => !(entity.status === 'draft' && entity.created_at.getTime() < expireDate))
+            .map((entity) => sanitizeEntity(entity, { model: strapi.models.order }));
     },
     async findOne(ctx) {
         const { id: uid } = ctx.params;
         const { user } = ctx.state;
+        const expireDate = Date.now() - MINUTES_15;
 
         const entity = await strapi.services.order.findOne({ uid, user: user.id });
+        if (entity && entity.status === 'draft' && entity.created_at.getTime() < expireDate) {
+            throw new Error('The order time has expired.');
+        }
         return sanitizeEntity(entity, { model: strapi.models.order });
     },
 

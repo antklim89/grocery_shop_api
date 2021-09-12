@@ -42,16 +42,16 @@
         "uuid": "^8.3.2"
     },
     "repository": {
-      "type": "git",
-      "url": "git@github.com:antklim89/grocery_shop_api.git"
+        "type": "git",
+        "url": "git@github.com:antklim89/grocery_shop_api.git"
     },
     "bugs": {
-      "url": "https://github.com/antklim89/grocery_shop_api/issues"
+        "url": "https://github.com/antklim89/grocery_shop_api/issues"
     },
     "keywords": [
-      "strapi",
-      "grocery",
-      "shop"
+        "strapi",
+        "grocery",
+        "shop"
     ],
     "author": {
         "name": "Me"
