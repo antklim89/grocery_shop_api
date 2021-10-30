@@ -11,8 +11,16 @@
  */
 
 module.exports = {
-    '* * 12 * * *': async () => {
+
+    /**
+   * Simple example.
+   * Every monday at 1am.
+   */
+    // '0 1 * * 1': () => {
+    //
+    // }
+    '0 0 10 * * *': async () => {
         const expireDate = Date.now() - (1000 * 60 * 15);
-        const orders = await strapi.services.order.delete({ created_at_lt: expireDate, status: 'draft' });
+        await strapi.services.order.delete({ created_at_lt: expireDate, status: 'draft' });
     },
 };
